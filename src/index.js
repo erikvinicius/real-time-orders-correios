@@ -2,10 +2,11 @@ const { rastro } = require('rastrojs');
 const NotifySend = require('node-notifier').NotifySend;
 
 var notifier = new NotifySend();
+const code = 'YOUR TRACK CODE';
 
 async function initialize() {
     let track;
-    track = await rastro.track('LB197281105HK');
+    track = await rastro.track(code);
     let lastTracksCount = track[0].tracks.length;
     console.log('last track:',  track[0].tracks[lastTracksCount - 1]);
     console.log('total tracks:' + lastTracksCount + '\n');
@@ -13,7 +14,7 @@ async function initialize() {
     console.log('waiting new update...');
     setInterval(async () => {
         console.log('checking for new updates... \n')
-        track = await rastro.track('LB197281105HK');
+        track = await rastro.track(code);
         if(track[0].tracks.length > lastTracksCount){
             console.log('new update found.')
             const lastTrack = track[0].tracks[track[0].tracks.length - 1];
